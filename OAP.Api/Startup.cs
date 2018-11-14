@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
@@ -10,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using OAPoliselo.Infra.Data.Context;
+using System;
 
 namespace OAP.Api
 {
@@ -37,7 +33,7 @@ namespace OAP.Api
                        .AllowAnyHeader();
             }));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.Configure<MvcOptions>(options =>
             {
@@ -48,6 +44,23 @@ namespace OAP.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<SqlContext>();
+                context.Database.Migrate();
+
+                try
+                {
+                    OAPoliselo.Infra.Data.DbInitializer.Initialize(context);
+                }
+                catch (Exception e)
+                {
+                    var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                    logger.LogError("Um erro ocorreu no método seeding do contexto.");
+                }
+            }
+            // ..
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -21,22 +21,26 @@ namespace OAPoliselo.Infra.Data
            {
                 new DishType {
                     Name = "entree",
+                    Order = 1,
                     CreatedDate = System.DateTime.Now,
                     Active = true
                 },
 
                 new DishType {
                     Name = "side",
+                    Order = 2,
                     CreatedDate = System.DateTime.Now,
                     Active = true
                 },
                 new DishType {
                     Name = "drink",
+                    Order = 3,
                     CreatedDate = System.DateTime.Now,
                     Active = true
                 },
                 new DishType {
                     Name = "dessert",
+                    Order = 4,
                     CreatedDate = System.DateTime.Now,
                     Active = true
                 }
