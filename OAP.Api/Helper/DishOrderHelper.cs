@@ -39,7 +39,7 @@ namespace OAPoliselo.Api.Helper
             {
                 if (resultString == string.Empty)
                 {
-                    if (item.Quantity > 1 && (item.Description == "coffe" || item.Description == "potato"))
+                    if (item.Quantity > 1 && (item.Description == "coffee" || item.Description == "potato"))
                         resultString += item.Description + "(x" + item.Quantity.ToString() + ")";
                     else
                         resultString += item.Description;

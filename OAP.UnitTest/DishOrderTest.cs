@@ -1,6 +1,8 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OAP.Api.Controllers;
+using OAPoliselo.Infra.Data.Context;
 using Xunit;
 
 namespace OAP.UnitTest
@@ -9,9 +11,19 @@ namespace OAP.UnitTest
     {
         private readonly DishOrderController controller;
 
+
         public DishOrderTest()
         {
             controller = new DishOrderController();
+
+            var optionsBuilder = new DbContextOptionsBuilder<SqlContext>();
+
+            optionsBuilder.UseSqlServer("Server=localhost;Database=OAPDatabaseTestDishOrder;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+            var context = new SqlContext(optionsBuilder.Options);
+
+            context.Database.Migrate();
+            OAPoliselo.Infra.Data.DbInitializer.Initialize(context);
         }
 
         [Fact]

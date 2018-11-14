@@ -23,7 +23,7 @@ namespace OAPoliselo.Infra.Data.Context
         {
 
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer("Server=localhost;Database=OAPDatabaseNew;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=OAPDatabaseFinal;Trusted_Connection=True;MultipleActiveResultSets=true");
             
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

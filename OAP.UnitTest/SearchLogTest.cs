@@ -1,12 +1,9 @@
-using OAP.Api.Controllers;
-using System;
-using Xunit;
-using Bogus;
 using FluentAssertions;
-using Xunit;
-using System.Collections.Generic;
-using OAPoliselo.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OAP.Api.Controllers;
+using OAPoliselo.Infra.Data.Context;
+using Xunit;
 
 namespace OAP.UnitTest
 {
@@ -17,6 +14,15 @@ namespace OAP.UnitTest
         public SearchLogTest()
         {
             controller = new SearchLogController();
+
+            var optionsBuilder = new DbContextOptionsBuilder<SqlContext>();
+
+            optionsBuilder.UseSqlServer("Server=localhost;Database=OAPDatabaseTestSearchLog;Trusted_Connection=True;MultipleActiveResultSets=true");
+
+            var context = new SqlContext(optionsBuilder.Options);
+
+            context.Database.Migrate();
+            OAPoliselo.Infra.Data.DbInitializer.Initialize(context);
         }
 
         [Fact]
@@ -27,6 +33,6 @@ namespace OAP.UnitTest
 
             //Valida o tipo da resosta com FluentAssertations
             searchLog.Should().BeOfType<OkObjectResult>();
-        }      
+        }
     }
 }
