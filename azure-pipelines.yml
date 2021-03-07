@@ -18,6 +18,9 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- task: TerraformInstaller@0
+    
+- task: TerraformCLI@0
   inputs:
-    terraformVersion: '0.12.3'
+    command: 'plan'
+    allowTelemetryCollection: true
+    publishPlanResults: 'Resultado Plan'
