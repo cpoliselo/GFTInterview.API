@@ -38,7 +38,7 @@ steps:
   inputs:
     awsCredentials: 'AWS Connection'
     regionName: 'us-east-1'
-    applicationName: 'Teste API'
-    environmentName: 'ITa'
+    applicationName: 'Teste AWS'
+    environmentName: 'Testeaws-env'
     applicationType: 'aspnet'
     webDeploymentArchive: '$(build.artifactstagingdirectory)\WebApp.zip'
