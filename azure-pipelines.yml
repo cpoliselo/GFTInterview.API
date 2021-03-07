@@ -37,7 +37,6 @@ steps:
   inputs:
     SearchPattern: '**/bin/**/*.pdb'
     SymbolServerType: ''
-container: 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
@@ -51,3 +50,4 @@ container:
     applicationName: 'Teste API'
     environmentName: 'ITa'
     applicationType: 'aspnet'
+    webDeploymentArchive: '$(build.artifactstagingdirectory)\WebApp.zip'
