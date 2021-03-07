@@ -28,3 +28,8 @@ steps:
     command: 'plan'
     allowTelemetryCollection: true
     publishPlanResults: 'Resultado Plan'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    allowTelemetryCollection: true
