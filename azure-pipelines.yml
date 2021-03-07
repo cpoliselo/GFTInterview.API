@@ -6,30 +6,22 @@
 trigger:
 - master
 
+variables:
+  - group: tf-aws-agent
+
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- task: TerraformCLI@0
+    sed "s/{{pat_token}}/${DEVOPS_PAT}/g; s/{{pool_name}}/${POOL_NAME}/g; s/{{agent_name}}/${AWS_AGENT_NAME}/g;" ./utils/terraform_init/aws/cfn/cft-parameters.json > ./cft-parameters.json
+    cat ./cft-parameters.json
+  displayName: 'Add pat token'
+- task: CloudFormationCreateOrUpdateStack@1
   inputs:
-    command: 'init'
-    allowTelemetryCollection: true
-    
-- task: TerraformCLI@0
-  inputs:
-    command: 'plan'
-    allowTelemetryCollection: true
-    publishPlanResults: 'Resultado Plan'
-
-- task: TerraformCLI@0
-  inputs:
-    command: 'apply'
-    allowTelemetryCollection: true
+    awsCredentials: 'AWS_Conn'
+    regionName: 'eu-north-1'
+    stackName: 'az-tf-agent'
+    templateSource: 'file'
+    templateFile: './utils/terraform_init/aws/cfn/azdevops-agent-vm-cft.yaml'
+    templateParametersFile: './cft-parameters.json'
