@@ -16,6 +16,11 @@ variables:
 
 steps:
 
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+  displayName: 'Install Terraform'
+- script: terraform version
+  displayName: Terraform Version
+
 - task: TerraformInstaller@0
   displayName: Terraform Install
   inputs:
