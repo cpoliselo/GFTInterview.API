@@ -14,7 +14,8 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   AWSAppName: 'AppTesteItau2'
-  AWSEnvironmentName: 'AppTesteItau2'
+  AWSEnvironmentName: 'AmbienteTesteItau2'
+  AWSRegion: 'us-east-1'
 
 steps:
 
@@ -44,7 +45,7 @@ steps:
   displayName: Deploy to AWS
   inputs:
     awsCredentials: 'AWS Connection 2'
-    regionName: 'us-east-1'
+    regionName: '$(AWSRegion)'
     applicationName: '$(AWSAppName)'
     environmentName: '$(AWSEnvironmentName)'
     applicationType: 'aspnet'
