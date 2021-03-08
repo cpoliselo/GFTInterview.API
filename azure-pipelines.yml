@@ -42,12 +42,18 @@ steps:
     allowTelemetryCollection: true    
 
 - task: TerraformCLI@0
+  displayName: Terraform Refresh
+  inputs:
+    command: 'refresh'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    allowTelemetryCollection: false
+   
+- task: TerraformCLI@0
   displayName: Terraform Apply
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true 
+    allowTelemetryCollection: false
 - task: NuGetToolInstaller@1
 
   
