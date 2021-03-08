@@ -28,6 +28,12 @@ steps:
     backendType: 'selfConfigured'
     allowTelemetryCollection: true
     
+- task: TerraformCLI@0
+  displayName: Terraform Destroy
+  inputs:
+    command: 'destroy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    allowTelemetryCollection: true
 
 - task: TerraformCLI@0
   displayName: Terraform Plan
