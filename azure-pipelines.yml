@@ -22,48 +22,23 @@ steps:
   displayName: Terraform Version
 - script: terraform init
   displayName: 'Terraform Init'
-  workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-
-    
-- task: TerraformCLI@0
-  displayName: Terraform Import App
-  inputs:
-    command: 'import'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    commandOptions: 'aws_elastic_beanstalk_application.application AppTesteItau2'
-    allowTelemetryCollection: true
-    
-- task: TerraformCLI@0
-  displayName: Terraform Import Env
-  inputs:
-    command: 'import'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    commandOptions: 'aws_elastic_beanstalk_environment.environment AmbienteTesteItau2'
-    allowTelemetryCollection: true
-    
-
-- task: TerraformCLI@0
-  displayName: Terraform Import S3
-  inputs:
-    command: 'import'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    commandOptions: 'aws_s3_bucket.bucketitau testeitau'
-    allowTelemetryCollection: true
-- task: TerraformCLI@0
+  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+- script: terraform import aws_elastic_beanstalk_application.application AppTesteItau2
+  displayName: 'Terraform Import App'
+  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+- script: terraform import aws_elastic_beanstalk_environment.environment AmbienteTesteItau2
+  displayName: 'Terraform Import Env'
+  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+- script: terraform import aws_s3_bucket.bucketitau testeitau
+  displayName: 'Terraform Import S3'
+  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+- script: terraform plan
   displayName: Terraform Plan
-  inputs:
-    command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true    
-
-- task: TerraformCLI@0
-  displayName: Terraform Apply
-  inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true 
+  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+- script: terraform apply
+  displayName: 'Terraform Apply'
+  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+  
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
