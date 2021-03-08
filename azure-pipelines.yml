@@ -26,7 +26,7 @@ steps:
 - script: terraform import aws_elastic_beanstalk_application.application AppTesteItau2
   displayName: 'Terraform Import App'
   workingDirectory: $(System.DefaultWorkingDirectory)/tf
-- script: terraform import aws_elastic_beanstalk_environment.environment AmbienteTesteItau2
+- script: terraform import aws_elastic_beanstalk_environment.environment AmbienteTesteItau2Id
   displayName: 'Terraform Import Env'
   workingDirectory: $(System.DefaultWorkingDirectory)/tf
 - script: terraform import aws_s3_bucket.bucketitau testeitau
