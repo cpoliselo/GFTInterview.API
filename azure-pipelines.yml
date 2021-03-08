@@ -15,7 +15,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: echo ${{ System.DefaultWorkingDirectory }}
+- script: echo $(System.DefaultWorkingDirectory)
 
 - task: NuGetToolInstaller@1
 
