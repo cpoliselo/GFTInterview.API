@@ -32,12 +32,24 @@ steps:
 - script: terraform import aws_s3_bucket.bucketitau testeitau
   displayName: 'Terraform Import S3'
   workingDirectory: $(System.DefaultWorkingDirectory)/tf
-- script: terraform plan
+
+- task: TerraformCLI@0
   displayName: Terraform Plan
-  workingDirectory: $(System.DefaultWorkingDirectory)/tf
-- script: terraform apply -auto-approve
-  displayName: 'Terraform Apply'
-  workingDirectory: $(System.DefaultWorkingDirectory)/tf
+  inputs:
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    backendType: 'selfConfigured'
+    allowTelemetryCollection: true    
+
+- task: TerraformCLI@0
+  displayName: Terraform Apply
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    backendType: 'selfConfigured'
+    allowTelemetryCollection: true 
+- task: NuGetToolInstaller@1
+
   
 - task: NuGetToolInstaller@1
 
