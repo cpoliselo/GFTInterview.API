@@ -20,6 +20,9 @@ steps:
   displayName: 'Install Terraform'
 - script: terraform version
   displayName: Terraform Version
+- script: terraform init
+  displayName: 'Terraform Init'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
 
 - task: TerraformInstaller@0
   displayName: Terraform Install
