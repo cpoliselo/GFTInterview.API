@@ -1,12 +1,4 @@
  # Configure the AWS Provider
- 
-terraform {
-  required_providers {
-    kafka = {
-      source = "Mongey/kafka"
-    }
-  }
-}
 
 provider "aws" {
   region  = "us-east-1"
@@ -33,11 +25,3 @@ resource "aws_s3_bucket" "bucketitau" {
   bucket = "testeitau"
   acl = "public-read"
   }
-  
-provider "kafka" {
-  bootstrap_servers = ["localhost:9092"]
-  ca_cert           = file("../secrets/ca.crt")
-  client_cert       = file("../secrets/terraform-cert.pem")
-  client_key        = file("../secrets/terraform.pem")
-  tls_enabled       = true
-}
