@@ -15,10 +15,10 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-
 - task: TerraformInstaller@0
+  displayName: Terraform Install
   inputs:
-    terraformVersion: '0.12.3'
+    terraformVersion: 'latest'
 - task: TerraformCLI@0
   displayName: Terraform Init
   inputs:
