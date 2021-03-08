@@ -16,6 +16,9 @@ variables:
 
 steps:
 
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: 'latest'
 - task: TerraformCLI@0
   displayName: Terraform Init
   inputs:
