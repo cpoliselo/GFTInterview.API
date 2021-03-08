@@ -29,12 +29,29 @@ steps:
     allowTelemetryCollection: true
     
 - task: TerraformCLI@0
-  displayName: Terraform Destroy
+  displayName: Terraform Import App
   inputs:
-    command: 'destroy'
+    command: 'import'
     workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    commandOptions: 'aws_elastic_beanstalk_application.application AppTesteItau2'
     allowTelemetryCollection: true
+    
+- task: TerraformCLI@0
+  displayName: Terraform Import Env
+  inputs:
+    command: 'import'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    commandOptions: 'aws_elastic_beanstalk_environment.environment AmbienteTesteItau2'
+    allowTelemetryCollection: true
+    
 
+- task: TerraformCLI@0
+  displayName: Terraform Import S3
+  inputs:
+    command: 'import'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    commandOptions: 'aws_s3_bucket.bucketitau testeitau'
+    allowTelemetryCollection: true
 - task: TerraformCLI@0
   displayName: Terraform Plan
   inputs:
