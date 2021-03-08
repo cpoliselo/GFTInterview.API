@@ -33,12 +33,19 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    allowTelemetryCollection: true
+- task: TerraformCLI@0
+  inputs:
+    command: 'plan'
+    allowTelemetryCollection: false
 - task: BeanstalkDeployApplication@1
   inputs:
-    awsCredentials: 'AWS Connection'
+    awsCredentials: 'AWS Connection 2'
     regionName: 'us-east-1'
-    applicationName: 'my-awesome-app'
-    environmentName: 'my-awesome-environment'
+    applicationName: 'AppTesteItau2'
+    environmentName: 'AmbienteTesteItau2'
     applicationType: 'aspnet'
     webDeploymentArchive: '$(build.artifactstagingdirectory)\WebApp.zip'
