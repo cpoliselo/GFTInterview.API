@@ -17,9 +17,11 @@ variables:
 steps:
 
 - task: TerraformInstaller@0
+  displayName: Terraform Install
   inputs:
     terraformVersion: 'latest'
 - task: TerraformCLI@0
+  displayName: Terraform Init
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
@@ -28,6 +30,7 @@ steps:
     
 
 - task: TerraformCLI@0
+  displayName: Terraform Plan
   inputs:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
@@ -35,6 +38,7 @@ steps:
     allowTelemetryCollection: true    
 
 - task: TerraformCLI@0
+  displayName: Terraform Apply
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
@@ -43,10 +47,12 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
+  displayName: Restore Nuget
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: Build Project
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
@@ -61,6 +67,7 @@ steps:
 
 
 - task: BeanstalkDeployApplication@1
+  displayName: Deploy to AWS
   inputs:
     awsCredentials: 'AWS Connection 2'
     regionName: 'us-east-1'
