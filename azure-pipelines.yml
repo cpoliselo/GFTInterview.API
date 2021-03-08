@@ -23,7 +23,8 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf/instance.tf'
+    backendType: 'selfConfigured'
     allowTelemetryCollection: true
     
 - task: NuGetToolInstaller@1
