@@ -46,7 +46,7 @@ steps:
   inputs:
     awsCredentials: 'AWS Connection 2'
     regionName: 'us-east-1'
-    applicationName: 'AppTesteItau2'
-    environmentName: 'AmbienteTesteItau2'
+    applicationName: 'AppBackendItau'
+    environmentName: 'AmbienteBackendItau'
     applicationType: 'aspnet'
     webDeploymentArchive: '$(build.artifactstagingdirectory)\WebApp.zip'
