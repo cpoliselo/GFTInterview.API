@@ -15,7 +15,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: echo $(System.DefaultWorkingDirectory)
 
 - task: TerraformInstaller@0
   inputs:
@@ -23,10 +22,24 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf/instance.tf'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
     backendType: 'selfConfigured'
     allowTelemetryCollection: true
     
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    backendType: 'selfConfigured'
+    allowTelemetryCollection: true    
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
+    backendType: 'selfConfigured'
+    allowTelemetryCollection: true 
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -46,11 +59,7 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-- task: TerraformCLI@0
-  inputs:
-    command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    allowTelemetryCollection: false
+
 - task: BeanstalkDeployApplication@1
   inputs:
     awsCredentials: 'AWS Connection 2'
