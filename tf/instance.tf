@@ -11,7 +11,8 @@ resource "aws_elastic_beanstalk_application" "application" {
 }
 
 resource "aws_elastic_beanstalk_environment" "environment" {
-  name                = "AmbienteTesteItau2"
+  id				  = "AmbienteItau2Id"
+  name                = "AmbienteItau2"
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = "64bit Windows Server 2019 v2.6.3 running IIS 10.0"
   setting {
