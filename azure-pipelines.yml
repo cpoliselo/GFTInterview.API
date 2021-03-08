@@ -45,8 +45,8 @@ steps:
   displayName: Deploy to AWS
   inputs:
     awsCredentials: 'AWS Connection 2'
-    regionName: '$(AWSRegion)'
-    applicationName: '$(AWSAppName)'
-    environmentName: '$(AWSEnvironmentName)'
+    regionName: 'us-east-1'
+    applicationName: 'AppTesteItau2'
+    environmentName: 'AmbienteTesteItau2'
     applicationType: 'aspnet'
     webDeploymentArchive: '$(build.artifactstagingdirectory)\WebApp.zip'
