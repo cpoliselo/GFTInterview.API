@@ -36,10 +36,12 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
     allowTelemetryCollection: true
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
     allowTelemetryCollection: false
 - task: BeanstalkDeployApplication@1
   inputs:
