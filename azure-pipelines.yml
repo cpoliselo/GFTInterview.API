@@ -15,57 +15,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: TerraformInstaller@0
-  displayName: Terraform Install
-  inputs:
-    terraformVersion: 'latest'
-- task: TerraformCLI@0
-  displayName: Terraform Init
-  inputs:
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true
-    
-- task: TerraformCLI@0
-  displayName: Terraform Import App
-  inputs:
-    command: 'import'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    commandOptions: 'aws_elastic_beanstalk_application.application AppTesteItau2'
-    allowTelemetryCollection: true
-    
-- task: TerraformCLI@0
-  displayName: Terraform Import Env
-  inputs:
-    command: 'import'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    commandOptions: 'aws_elastic_beanstalk_environment.environment e-f5kmb3buv7'
-    allowTelemetryCollection: true
-    
 
-- task: TerraformCLI@0
-  displayName: Terraform Import S3
-  inputs:
-    command: 'import'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    commandOptions: 'aws_s3_bucket.bucketitau testeitau'
-    allowTelemetryCollection: true
-- task: TerraformCLI@0
-  displayName: Terraform Plan
-  inputs:
-    command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true    
-
-- task: TerraformCLI@0
-  displayName: Terraform Apply
-  inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true 
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
