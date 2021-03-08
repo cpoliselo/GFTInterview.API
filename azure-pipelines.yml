@@ -36,7 +36,7 @@ steps:
 
 - task: BeanstalkDeployApplication@1
   inputs:
-    awsCredentials: 'AWS Connection'
+    awsCredentials: 'AWS Connection 2'
     regionName: 'us-east-1'
     applicationName: 'AppTesteItau2'
     environmentName: 'AmbienteTesteItau2'
