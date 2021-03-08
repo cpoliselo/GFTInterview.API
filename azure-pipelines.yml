@@ -24,17 +24,6 @@ steps:
   displayName: 'Terraform Init'
   workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
 
-- task: TerraformInstaller@0
-  displayName: Terraform Install
-  inputs:
-    terraformVersion: 'latest'
-- task: TerraformCLI@0
-  displayName: Terraform Init
-  inputs:
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/tf'
-    backendType: 'selfConfigured'
-    allowTelemetryCollection: true
     
 - task: TerraformCLI@0
   displayName: Terraform Import App
